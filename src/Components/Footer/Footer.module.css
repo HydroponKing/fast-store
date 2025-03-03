@@ -1,0 +1,13 @@
+.footerContainer {
+    background-color: rgba(162, 184, 250, 0.53);
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 35px 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-size: 24px;
+
+}
+.inconsolataFont p, h3{
+    font-family: "Inconsolata", serif;
+}

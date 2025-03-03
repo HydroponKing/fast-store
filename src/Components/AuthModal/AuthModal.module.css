@@ -1,0 +1,55 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.modalContent {
+    background: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.inputLogin, .inputPass{
+    font-size: 18px;
+    font-weight: 600;
+    padding: 4px 12px;
+    margin: 5px 0;
+    border-radius: 10px;
+    border: none;
+    background-color: lightgray;
+    width: 80%
+}
+.inputLogin::placeholder, .inputPass::placeholder{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.buttonLog {
+    font-size: 16px;
+    background-color: lightgray;
+    border: none;
+    color: #676767;
+    padding: 12px;
+    width: 100px;
+    border-radius: 10px;
+    transition: color, background-color 0.5s ease;
+    margin-top: 10px;
+}
+.buttonLog:hover {
+    background-color: #676767;
+    color: lightgray;
+}

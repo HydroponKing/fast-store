@@ -1,0 +1,32 @@
+.defaultBuy{
+    width: 140px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: lightgray;
+    color: #676767;
+}
+.activeButtonContainerCenter{
+    display: flex;
+    justify-content: center;
+
+}
+.activeButtonContainer{
+    display: flex;
+    background-color: lightgray;
+    border-radius: 10px;
+    align-items: center;
+    width: 140px;
+
+}
+.activeMicroButton{
+    width: 20px;
+    background-color: lightgray;
+    color: #676767;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+}
+.countDisplay{
+    padding: 0 10px;
+}

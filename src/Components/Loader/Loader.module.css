@@ -1,0 +1,11 @@
+.loadingContainer{
+    height: 600px;
+    display: flex;
+    justify-content: center;
+}
+.loadingText{
+    font-size: 56px;
+    font-weight: 800;
+    position: absolute;
+    padding: 10% 45%;
+}

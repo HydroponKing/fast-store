@@ -1,0 +1,52 @@
+*{
+    font-family: "Caveat", serif;
+    font-style: normal;
+    font-weight: 600;
+    color: rgb(28, 39, 76);
+}
+
+
+.cardContainer {
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.img {
+    width: 220px;
+    height: 220px;
+    mix-blend-mode: multiply;
+    object-fit: contain;
+}
+
+.infoContainer{
+    text-align: center;
+    font-size: 24px;
+}
+
+.title{
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Количество строк */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.infoProductContainer{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.infoProductItems{
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.buyProductContainer{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
