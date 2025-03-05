@@ -1,6 +1,8 @@
 const linkApi = 'https://fakestoreapi.com'
+
 const productApi = '/products'
 const loginApi = '/auth/login'
+const usersApi = '/users'
 
 export interface Product {
     id: number;
@@ -55,6 +57,37 @@ export async function fetchAuth(credentials:AuthData): Promise<AuthResponse> {
         return data
     }catch (error){
         console.error(`AUTH  FAIL IS - `, error)
+        throw error
+    }
+}
+
+export async function fetchGetUser (userName){
+    try {
+        const response = await fetch(linkApi + usersApi)
+        if (!response.ok) {
+            throw new Error (`HTTP ERROR STATUS: ${response.status}`)
+        }
+        const data = await response.json()
+        const user = await data.find(person => person.username === userName)
+        //return user.id
+        return user
+    }catch (error) {
+        console.error('ERROR FETCH', error)
+        throw error
+    }
+}
+
+export async function fetchGetUserId (userName){
+    try {
+        const response = await fetch(linkApi + usersApi)
+        if (!response.ok) {
+            throw new Error (`HTTP ERROR STATUS: ${response.status}`)
+        }
+        const data = await response.json()
+        const user = await data.find(person => person.username === userName)
+        return user.id
+    }catch (error) {
+        console.error('ERROR FETCH', error)
         throw error
     }
 }
