@@ -6,7 +6,7 @@ interface AuthModalProps {
     onClose: () => void
 }
 
-function AuthModal( {onClose}: AuthModalProps ) {
+function AuthModal( { onClose }: AuthModalProps ) {
 
     const [loginInput, setLoginInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
@@ -19,6 +19,7 @@ function AuthModal( {onClose}: AuthModalProps ) {
         try {
             const authData = await fetchAuth({ username: loginInput, password: passwordInput })
             localStorage.setItem('token', authData.token)
+            localStorage.setItem('name', loginInput)
             setIsCompleteLogin(true)
         }catch (error){
             console.error(`ERROR IS - ${error}`)
