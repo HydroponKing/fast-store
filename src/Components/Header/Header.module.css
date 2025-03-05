@@ -11,3 +11,20 @@
     display: flex;
     gap: 30px;
 }
+
+.authTrueContainer{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.userWordContainer{
+    width: 35px;
+    height: 35px;
+    background-color: rgba(102, 119, 162, 0.53);
+    border-radius: 15px;
+}
+.userWord{
+    padding-top: 2px;
+    text-align: center;
+    font-size: 22px;
+}

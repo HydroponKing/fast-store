@@ -21,6 +21,7 @@ function AuthModal( { onClose }: AuthModalProps ) {
             localStorage.setItem('token', authData.token)
             localStorage.setItem('name', loginInput)
             setIsCompleteLogin(true)
+            setTimeout(()=> location.reload(), 1500)
         }catch (error){
             console.error(`ERROR IS - ${error}`)
             setIsFalseLogin(true)
