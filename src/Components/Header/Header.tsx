@@ -1,23 +1,32 @@
 import s from './Header.module.css'
 import { Logo, Cart, User } from '../../assets/react.tsx'
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import AuthModal from '../AuthModal/AuthModal.tsx';
+import UserModal from "../UserModal/UserModal.tsx";
 import CartModal from "../CartModal/CartModal.tsx";
 
 const Header = () => {
     const [isModalOpen, setModalOpen] = useState(false)
-    const [isCartUser, setIsCartUser] = useState(false)
+    const [isModalUser, setIsModalUser] = useState(false)
+    const [isModalCart, setIsModalCart] = useState(false)
 
-    const handleUserClick = () => {
+    const isUser = localStorage.getItem("name") || ""
+    const isUserWord = isUser.toUpperCase()[0]
+
+
+    const handleAuthClick = () => {
         setModalOpen(true)
     }
-    const handleCartClick = () => {
-        setIsCartUser(true)
+    const handleUserClick = () => {
+        setIsModalUser(true)
     }
-
+    const handleCartClick = () => {
+        setIsModalCart(true)
+    }
     const closeModal = () => {
         setModalOpen(false)
-        setIsCartUser(false)
+        setIsModalUser(false)
+        setIsModalCart(false)
     }
 
 
@@ -29,12 +38,21 @@ const Header = () => {
                     <Logo width={85}/>
                 </div>
                 <div className={s.userItems}>
-                    <Cart width={40} onClick={handleCartClick} />
-                    <User width={40} onClick={handleUserClick}/>
+                    {isUser ?
+                    <div className={s.authTrueContainer}>
+                        <Cart width={40} onClick={handleCartClick}/>
+                        <div className={s.userWordContainer} onClick={handleUserClick} >
+                            <p className={s.userWord}>{isUserWord}</p>
+                        </div>
+                    </div>
+                    :
+                        <User width={40} onClick={handleAuthClick}/>
+                    }
                 </div>
             </div>
             {isModalOpen && <AuthModal onClose={closeModal}/>}
-            {isCartUser && <CartModal onClose={closeModal}/>}
+            {isModalUser && <UserModal onClose={closeModal}/>}
+            {isModalCart && <CartModal onClose={closeModal}/>}
         </>
     );
 };
