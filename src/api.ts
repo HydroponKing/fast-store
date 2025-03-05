@@ -3,6 +3,7 @@ const linkApi = 'https://fakestoreapi.com'
 const productApi = '/products'
 const loginApi = '/auth/login'
 const usersApi = '/users'
+const cartApi = '/carts/'
 
 export interface Product {
     id: number;
@@ -69,7 +70,6 @@ export async function fetchGetUser (userName){
         }
         const data = await response.json()
         const user = await data.find(person => person.username === userName)
-        //return user.id
         return user
     }catch (error) {
         console.error('ERROR FETCH', error)
@@ -91,5 +91,27 @@ export async function fetchGetUserId (userName){
         throw error
     }
 }
+
+export const fetchGetCard = async () => {
+    try {
+        const username = localStorage.getItem('name')
+        if (!username) {
+            throw new Error("USER NOT IN LOCALSTORAGE")
+        }
+        const userId = await fetchGetUserId(username)
+        const cartUrl = `${linkApi}${cartApi}${userId}`
+        const response = await fetch(cartUrl)
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const cartData = await response.json()
+        return cartData.products
+
+    }catch (error) {
+        console.error('ERROR FETCH', error)
+        throw error
+    }
+}
+
 
 

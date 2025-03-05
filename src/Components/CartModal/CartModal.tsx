@@ -1,40 +1,25 @@
-//import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './CartModal.module.css';
-import React, {useEffect, useState} from "react";
-import {fetchGetUser} from "../../api.ts";
+import {fetchGetCard} from "../../api.ts";
 
-const username = localStorage.getItem('name');
+const CartModal = ({ onClose }) => {
 
-const dataSet = {
-    "id": "loading...",
-    "email": "loading...",
-    "username": "loading...",
-    "name": {
-        "firstname": "loading...",
-        "lastname": " "
-    },
-    "phone": "loading...",
-}
+    const [data, setData] = useState()
 
-interface ModalProps {
-    onClose: () => void
-}
-
-const CartModal = ({ onClose }: ModalProps) => {
-
-    const [data, setData] = useState(dataSet)
 
     useEffect(() => {
-        const fetchData = async () => {
+        const loadData = async () => {
             try {
-                const data = await fetchGetUser(username);
-                setData(data)
-            }catch (error){
-                console.log(error)
+                const cartData = await fetchGetCard()
+                setData(cartData);
+            } catch (err) {
+                console.log(err)
             }
-        }
-        fetchData()
+        };
+
+        loadData();
     }, []);
+
 
     const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget){
@@ -42,23 +27,18 @@ const CartModal = ({ onClose }: ModalProps) => {
         }
     }
 
+
+
     return (
-        <div className={s.modalOverlay} onClick={handleOverlayClick}>
-            <div className={s.modalContent}>
-                <div className={s.mainContainer}>
-                    <div className={s.mainText}>
-                        Account
+        <div>
+            <div className={s.modalOverlay} onClick={handleOverlayClick}>
+                <div className={s.modalContent}>
+                    <div>
+                        {data ?
+                            data.map(product=><div key={product.productId}>Id-{product.productId}; Quantity-{product.quantity}</div>)
+                            : 'loading...'}
+                        <button onClick={fetchGetCard}>CLICK</button>
                     </div>
-                    <div className={s.accountContainer}>
-                        <div>Id: {data.id}</div>
-                        <div>Email: {data.email}</div>
-                        <div>Username: {data.username}</div>
-                    </div>
-                    <div className={s.personContainer}>
-                        <div>name: {data.name.firstname} {data.name.lastname}</div>
-                        <div>phone:{data.phone}</div>
-                    </div>
-                    <button className={s.buttonLogOut} onClick={()=>fetchGetUser(username)}>LogOut</button>
                 </div>
             </div>
         </div>
