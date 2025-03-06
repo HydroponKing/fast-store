@@ -1,12 +1,10 @@
 import s from './AuthModal.module.css'
 import React, {useState} from "react";
 import {fetchAuth} from "../../api.ts";
+import {ModalProps} from "../interfeces.ts";
 
-interface AuthModalProps {
-    onClose: () => void
-}
 
-function AuthModal( { onClose }: AuthModalProps ) {
+function AuthModal( { onClose }: ModalProps ) {
 
     const [loginInput, setLoginInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
