@@ -1,3 +1,5 @@
+import {User} from "./Components/interfeces.ts";
+
 const linkApi = 'https://fakestoreapi.com'
 
 const productApi = '/products'
@@ -62,14 +64,14 @@ export async function fetchAuth(credentials:AuthData): Promise<AuthResponse> {
     }
 }
 
-export async function fetchGetUser (userName){
+export async function fetchGetUser (userName: string): Promise<User> {
     try {
         const response = await fetch(linkApi + usersApi)
         if (!response.ok) {
             throw new Error (`HTTP ERROR STATUS: ${response.status}`)
         }
         const data = await response.json()
-        const user = await data.find(person => person.username === userName)
+        const user = await data.find((person: User) => person.username === userName) as User
         return user
     }catch (error) {
         console.error('ERROR FETCH', error)
@@ -77,14 +79,14 @@ export async function fetchGetUser (userName){
     }
 }
 
-export async function fetchGetUserId (userName){
+export async function fetchGetUserId (userName:string):Promise<number>{
     try {
         const response = await fetch(linkApi + usersApi)
         if (!response.ok) {
             throw new Error (`HTTP ERROR STATUS: ${response.status}`)
         }
         const data = await response.json()
-        const user = await data.find(person => person.username === userName)
+        const user = await data.find((person: User) => person.username === userName)
         return user.id
     }catch (error) {
         console.error('ERROR FETCH', error)

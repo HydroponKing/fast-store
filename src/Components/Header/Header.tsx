@@ -1,6 +1,6 @@
 import s from './Header.module.css'
 import { Logo, Cart, User } from '../../assets/react.tsx'
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import AuthModal from '../AuthModal/AuthModal.tsx';
 import UserModal from "../UserModal/UserModal.tsx";
 import CartModal from "../CartModal/CartModal.tsx";

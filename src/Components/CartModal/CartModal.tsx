@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import s from './CartModal.module.css';
-import {fetchGetCard} from "../../api.ts";
+import {fetchGetCard, fetchGetUserId} from "../../api.ts";
+import {DataCart, ModalProps} from "../interfeces.ts";
 
-const CartModal = ({ onClose }) => {
+const CartModal = ({ onClose }: ModalProps) => {
 
-    const [data, setData] = useState()
+    const [data, setData] = useState<DataCart[]>()
+    const [isLoading, setIsLoading] = useState(true)
+    const [isError, setIsError] = useState<string | null>(null)
 
 
     useEffect(() => {
@@ -14,6 +17,9 @@ const CartModal = ({ onClose }) => {
                 setData(cartData);
             } catch (err) {
                 console.log(err)
+                setIsError("failed loadData")
+            }finally {
+                setIsLoading(false)
             }
         };
 
@@ -27,6 +33,12 @@ const CartModal = ({ onClose }) => {
         }
     }
 
+    const handleHandle = () => {
+        //mor_2314
+        fetchGetUserId("mor_2314").then(data => console.log(data))
+        console.log(data)
+    }
+
 
 
     return (
@@ -34,10 +46,18 @@ const CartModal = ({ onClose }) => {
             <div className={s.modalOverlay} onClick={handleOverlayClick}>
                 <div className={s.modalContent}>
                     <div>
-                        {data ?
-                            data.map(product=><div key={product.productId}>Id-{product.productId}; Quantity-{product.quantity}</div>)
-                            : 'loading...'}
-                        <button onClick={fetchGetCard}>CLICK</button>
+
+                        {isLoading ? (
+                            'loading...'
+                        ): isError ? (
+                            <div className={s.modalContent}>{isError}</div>
+                        ): data?.length ? (
+                            data.map((product: DataCart)=><div key={product.productId}>Id-{product.productId}; Quantity-{product.quantity}</div>)
+                        ):(
+                            'Cart is empty'
+                        )
+                        }
+                        <button onClick={handleHandle}>CLICK</button>
                     </div>
                 </div>
             </div>
